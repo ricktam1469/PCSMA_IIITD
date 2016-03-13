@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert title here</title>
+
+</head>
+<body bgcolor="cyan" id="animate-area">
+
+<br></br>
+
+<table align="center" cellspacing="10" cellspadding="10">
+
+	<tr th:each = "j:${json}">
+	<th th:text = "${j.name}"></th>
+	<th th:text = "${j.rollnumber}"></th>
+	<th th:text = "${j.response}"></th>
+	</tr>
+	
+</table>
+
+	<div id="graphDiv1"></div>
+	<br />
+	
+	<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+	<script src="html5-canvas-bar-graph.js"></script>
+	<script th:inline="javascript">(function () {
+	
+		function createCanvas(divName) {
+			
+			var div = document.getElementById(divName);
+			var canvas = document.createElement('canvas');
+			div.appendChild(canvas);
+			if (typeof G_vmlCanvasManager != 'undefined') {
+				canvas = G_vmlCanvasManager.initElement(canvas);
+			}	
+			var ctx = canvas.getContext("2d");
+			return ctx;
+		}
+		
+		var ctx = createCanvas("graphDiv1");
+		var a=[[${response}]];
+		var graph = new BarGraph(ctx);
+		graph.maxValue = 50;
+		graph.margin = 2;
+		graph.colors = ["#49a0d8", "#d353a0", "#ffc527", "#df4c27"];
+		graph.xAxisLabelArr = ["A", "B", "C", "D"];
+		setInterval(function () {
+			graph.update(a);
+		}, 1000);
+		
+		
+	}());</script>
+	
+</body>
+
+</html>

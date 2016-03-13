@@ -1,0 +1,9 @@
+References
+
+https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#
+
+www.aerospike.com
+
+hmkcode.appspot.com
+
+hmkcode.com

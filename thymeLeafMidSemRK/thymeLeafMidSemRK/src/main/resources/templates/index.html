@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="fifaDesign.css"></link>
+</head>
+<body bgcolor="cyan" id="animate-area">
+
+<br></br>
+
+<table align="center" cellspacing="10" cellspadding="10">
+<tr>
+<th>
+<div class="stage" style="width: 100px; height: 100px;">
+<div class="cubespinner">
+<div class="face1"><img src="images/fcb.jpg" width="100px" height="100px"/></div>
+<div class="face2"><img src="images/chelsea.jpg" width="100px" height="100px"/></div>
+<div class="face3"><img src="images/liverpool.jpg" width="100px" height="100px"/></div>
+<div class="face4"><img src="images/manu.jpg" width="100px" height="100px"/></div>
+<div class="face5"><img src="images/rma.jpg" width="100px" height="100px"/></div>
+<div class="face6"><img src="images/atletico.png" width="100px" height="100px"/></div>
+</div>
+</div>
+<br></br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th><h1><font color="#390D69" face="Comic Sans MS">WELCOME TO FIFA WORLD</font></h1></th>
+</tr>
+<tr>
+<th></th>
+<th>
+	<table border="1"  cellspacing="10" cellspadding="10" id="animate-area1" >
+	<tr>
+	
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Club</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Team1</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Goals</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Team2</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Goals</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Winner</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Date</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Player of Match</font></th>
+	
+	</tr>
+	
+	<tr th:each = "fifa:${fifaUpdate}">
+	<th th:text = "${fifa.club}"></th>
+	<th th:text = "${fifa.team1}"></th>
+	<th th:text = "${fifa.team1Goals}"></th>
+	<th th:text = "${fifa.team2}"></th>
+	<th th:text = "${fifa.team2Goals}"></th>
+	<th th:text = "${fifa.winner}"></th>
+	<th th:text = "${fifa.date}"></th>
+	<th th:text = "${fifa.playerOfMatch}"></th>
+	</tr>
+	
+</table>
+</th>
+</tr>
+</table>
+</body>
+</html>

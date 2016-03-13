@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert  here</title>
+<link rel="stylesheet" type="text/css" href="fifaDesign.css"></link>
+</head>
+<script src="validation.js"></script>
+<body id="animate-area" >
+<table align="center">
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+<form name="soccer" action="/addDetails" onsubmit="return validateForm()">
+<fieldset >
+    <legend>FIFA WORLD DETAILS</legend>
+Club <font color="red">*</font><br></br>
+  <input type="text" name="club" placeholder="Name of Club"/><br></br><br></br>
+  Team1 <font color="red" >*</font><br></br>
+  <input type="text" name="team1" placeholder="Name of Team"/><br></br><br></br>
+  Goals <font color="red">*</font><br></br>
+  <input type="number" name="team1Goals"/><br></br><br></br>
+  Team2 <font color="red">*</font> <br></br>
+  <input type="text" name="team2"/><br></br><br></br>
+  Goals <font color="red">*</font><br></br>
+  <input type="number" name="team2Goals"/><br></br><br></br>
+  Winner <font color="red">*</font><br></br>
+  <input type="text" name="winner"/><br></br><br></br>
+  Date <font color="red">*</font><br></br>
+  <input type="date" name="date"/><br></br><br></br>
+  Player Of Match <font color="red">*</font><br></br>
+  <input type="text" name="playerOfMatch"/><br></br>
+  <font color="red" size="1" align="left"> * mandatory fields</font><br></br><br></br>
+  <input type="submit" name="Submit"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="Reset"/>
+  </fieldset>
+</form>
+</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
+
+</body>
+</html>

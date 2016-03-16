@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert  here</title>
+<link rel="stylesheet" type="text/css" href="Design.css"></link>
+</head>
+<script src="validation.js"></script>
+<body id="animate-area" >
+<table align="center">
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+<form name="soccer" action="/registermethod" onsubmit="return validateForm()">
+<fieldset >
+    <legend>Registration Page</legend>
+Name <font color="red">*</font><br></br>
+  <input type="text" name="name" placeholder="Name"/><br></br><br></br>
+ Email_id <font color="red" >*</font><br></br>
+  <input type="email" name="email" placeholder="email id"/><br></br><br></br>
+ Password <font color="red">*</font><br></br>
+  <input type="password" name="password"/><br></br><br></br>
+   Date Of Birth <br></br>
+  <input type="date" name="dob"/><br></br><br></br>
+  
+  <font color="red" size="1" align="left"> * mandatory fields</font><br></br><br></br>
+  <input type="submit" name="Submit"/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="reset" name="Reset"/>
+  </fieldset>
+</form>
+</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
+
+</body>
+</html>

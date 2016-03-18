@@ -188,4 +188,15 @@ public String error(
 			
 			return "register";
 		}
+		
+		@RequestMapping(value = "/afterwelcome", method = RequestMethod.GET)
+		public String afterWelcome(
+				Model model
+					) {
+			int[] intArray = new int[] {40,60,70,90};
+			
+			model.addAttribute("jss",intArray);
+				
+				return "afterWelcome";
+			}
 }

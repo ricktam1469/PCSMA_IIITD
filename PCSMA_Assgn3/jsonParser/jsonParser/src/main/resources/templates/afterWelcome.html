@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert  here</title>
+<link rel="stylesheet" type="text/css" href="Design.css"></link>
+</head>
+
+<body id="animate-area">
+
+HELLO ALL
+<div id="graphDiv1"></div>
+	
+	
+	<!--[if IE]><script src="excanvas.js"></script><![endif]-->
+	<script src="html5-canvas-bar-graph.js"></script>
+	<script th:inline="javascript">
+
+	/*<![CDATA[*/	
+		function createCanvas(divName) {
+			
+			var div = document.getElementById(divName);
+			var canvas = document.createElement('canvas');
+			div.appendChild(canvas);
+			if (typeof G_vmlCanvasManager != 'undefined') {
+				canvas = G_vmlCanvasManager.initElement(canvas);
+			}	
+			var ctx = canvas.getContext("2d");
+			return ctx;
+		}
+		
+		var ctx = createCanvas("graphDiv1");
+		
+		var message = /*[${intArray}];*/
+		document.write("HELLO"+message[0]);
+		var graph = new BarGraph(ctx);
+		graph.maxValue = 50;
+		graph.margin = 2;
+		graph.colors = ["#49a0d8", "#d353a0", "#ffc527", "#df4c27"];
+		graph.xAxisLabelArr = ["A", "B", "C", "D"];
+		setInterval(function () {
+			graph.update(message[0],message[1],message[2],message[3]);
+		}, 1000);
+		
+		/*]]>*/	
+
+	
+	</script>
+	DONE
+</body>
+
+</html>

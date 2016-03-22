@@ -5,48 +5,57 @@
 <title>Insert  here</title>
 <link rel="stylesheet" type="text/css" href="Design.css"></link>
 </head>
+<script src="validation.js"></script>
+<body id="animate-area" >
 
-<body id="animate-area">
-
-HELLO ALL
-<div id="graphDiv1"></div>
+<script  th:inline="javascript">
+/*<![CDATA[*/
+window.onload = function (){
 	
+	var time = [[${timer}]];
+	var ques=[[${ques}]];
+	alert(time);
+	alert(ques);
 	
-	<!--[if IE]><script src="excanvas.js"></script><![endif]-->
-	<script src="html5-canvas-bar-graph.js"></script>
-	<script th:inline="javascript">
+	//var quiztime=document.getElementById('txtbox').value;
+	//quiztimeinsec= quiztime * 60;
+	quiztimeinsec= time * 60;
+	countDown(quiztimeinsec,"status","bar");
 
-	/*<![CDATA[*/	
-		function createCanvas(divName) {
-			
-			var div = document.getElementById(divName);
-			var canvas = document.createElement('canvas');
-			div.appendChild(canvas);
-			if (typeof G_vmlCanvasManager != 'undefined') {
-				canvas = G_vmlCanvasManager.initElement(canvas);
-			}	
-			var ctx = canvas.getContext("2d");
-			return ctx;
-		}
-		
-		var ctx = createCanvas("graphDiv1");
-		
-		var message = /*[${intArray}];*/
-		document.write("HELLO"+message[0]);
-		var graph = new BarGraph(ctx);
-		graph.maxValue = 50;
-		graph.margin = 2;
-		graph.colors = ["#49a0d8", "#d353a0", "#ffc527", "#df4c27"];
-		graph.xAxisLabelArr = ["A", "B", "C", "D"];
-		setInterval(function () {
-			graph.update(message[0],message[1],message[2],message[3]);
-		}, 1000);
-		
-		/*]]>*/	
+}
 
+function countDown(secs,elem,bar) {
 	
-	</script>
-	DONE
+	var element = document.getElementById(elem);
+	var barV = document.getElementById(bar);
+	
+	element.innerHTML = "Time left  "+secs+" seconds";
+	//barV.innerHTML=" <meter high="+(secs-10)/100+" low="+(secs-40)/100+" max="+secs/100+" optimum="+secs/100+" value="+secs/100+"></meter>"
+	barV.innerHTML=" <meter high=1 low=0.2 max=1.2 optimum=1.2 value="+secs/100+"></meter>"
+	if(secs < 1) {
+		clearTimeout(timer);
+		element.innerHTML = '<h2><a href="/allQuiz">See Result Log</a></h2>';
+		window.location="http://localhost:8080/allQuiz";
+	}
+	secs--;
+	var timer = setTimeout('countDown('+secs+',"'+elem+'","'+bar+'")',1000);
+}
+/*]]>*/
+</script>
+<div id="status"></div>
+<div id="bar"></div>
+
+
+<table align="center">
+<tr>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+<th>
+
+</th>
+<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+</tr>
+</table>
+
 </body>
-
 </html>

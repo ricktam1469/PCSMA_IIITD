@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="fifaDesign.css"></link>
+</head>
+<body bgcolor="cyan" id="animate-area">
+
+<br></br>
+
+<table align="center" cellspacing="10" cellspadding="10">
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th><h1><font color="#390D69" face="Comic Sans MS">ALL STUDENT DETAILS</font></h1></th>
+</tr>
+<tr>
+<th></th>
+<th>
+	<table border="1"  cellspacing="10" cellspadding="10" id="animate-area1" >
+	<tr>
+	<th ><font color="#390D69" face="Comic Sans MS" size="4">Quiz Id</font></th>
+	<th ><font color="#390D69" face="Comic Sans MS" size="4">Name</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Roll Number</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Response</font></th>
+	
+	
+	</tr>
+	
+	<tr th:each = "q:${quizstudent}">
+	<th th:text = "${q.quizId}"></th>
+	<th th:text = "${q.name}"></th>
+	<th th:text = "${q.rollnumber}"></th>
+	<th th:text = "${q.response}"></th>
+	</tr>
+	
+</table>
+</th>
+
+</tr>
+<tr>
+<th></th>
+<th>
+
+<font color="#4CA3DC" face="Comic Sans MS">GO BACK</font><br></br><a href="/welcome">
+           <img src="images/back.bmp" width="50" height="50" /></a>
+</th>
+<th></th>
+</tr>
+</table>
+<br></br><br></br>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="fifaDesign.css"></link>
+</head>
+<body bgcolor="cyan" id="animate-area">
+
+<br></br>
+
+<table align="center" cellspacing="10" cellspadding="10">
+<tr>
+<th>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</th>
+<th><h1><font color="#390D69" face="Comic Sans MS">WELCOME TO FIFA WORLD</font></h1></th>
+</tr>
+<tr>
+<th></th>
+<th>
+	<table border="1"  cellspacing="10" cellspadding="10" id="animate-area1" >
+	<tr>
+	
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Quiz No.</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Questions</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Answer</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Graph Response</font></th>
+	
+	</tr>
+	
+	<tr th:each = "q:${quizes}">
+	<th th:text = "${q.qid}"></th>
+	<th th:text = "${q.ques}"></th>
+	<th th:text = "${q.answer}"></th>
+	<th><a th:href="|/graphresponse?qid=${q.qid}|">See Responses</a></th>
+	<th><a href="/studentresponse">All Student Response</a></th>
+	<th><a th:href="|/delete?qid=${q.qid}|"><input type="button" value="Delete" name="delete"/></a></th>
+	</tr>
+	
+</table>
+</th>
+
+</tr>
+<tr>
+<th></th>
+<th>
+<font color="#4CA3DC" face="Comic Sans MS">Want to Add more</font><br></br><a href="/insert">
+           <img src="images/add.png" width="25" height="25" /></a><br></br>
+<font color="#4CA3DC" face="Comic Sans MS">GO BACK TO HOME SPORTS PAGE</font><br></br><a href="/welcome">
+           <img src="images/back.bmp" width="50" height="50" /></a>
+</th>
+<th></th>
+</tr>
+</table>
+<br></br><br></br>
+
+</body>
+</html>

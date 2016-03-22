@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    android:background="#0B1A43">
+
+    <TextView
+        android:id="@+id/tvIsConnected"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="#7185BB"
+        android:textColor="#FFF"
+        android:textSize="18dp"
+        android:layout_marginBottom="5dp"
+        android:text="is connected? " />
+
+    <EditText
+        android:id="@+id/etResponse"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:ems="10"
+        android:layout_marginTop="10dp"
+        android:inputType="textMultiLine"
+        android:layout_weight="0.79">
+
+        <requestFocus />
+    </EditText>
+    <Button
+        android:id="@+id/rd"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Start Quiz"
+        android:textSize="22dp"
+        android:layout_marginLeft="100dp"
+        android:textStyle="italic"
+        android:onClick="signIn"
+        android:background="#7185BB"
+        android:layout_marginTop="20dp"
+        />
+
+</LinearLayout>

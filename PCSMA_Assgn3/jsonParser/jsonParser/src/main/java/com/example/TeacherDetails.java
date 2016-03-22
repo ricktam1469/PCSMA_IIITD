@@ -1,8 +1,5 @@
 package com.example;
 
-import java.util.Date;
-
-
 import org.springframework.data.annotation.Id;
 
 public class TeacherDetails {

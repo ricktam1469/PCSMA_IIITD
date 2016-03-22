@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="Design.css"></link>
+</head>
+
+<body>
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript"  th:inline="javascript">
+/*<![CDATA[*/
+window.onload = function () {
+	
+	
+
+    var message = [[${message}]];
+    //alert(message[0]);
+    //alert(message[1]);
+
+
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme3",//theme1
+		title:{
+			text: "GRAPHICAL RESULT"              
+		},
+		animationEnabled: true,   // change to true
+		data: [              
+		{
+			// Change type to "bar", "area", "spline", "pie",column,etc.
+			type: "column",
+			dataPoints: [
+				{ label: "A",  y: message[0]  },
+				{ label: "B", y: message[1]  },
+				{ label: "C", y: message[2]  },
+				{ label: "D",  y: message[3] },
+				
+			]
+		}
+		]
+	});
+	chart.render();
+}
+/*]]>*/
+</script>
+
+
+<div id="chartContainer" style="height: 500px; width: 100%;"></div>
+</body>
+</html>

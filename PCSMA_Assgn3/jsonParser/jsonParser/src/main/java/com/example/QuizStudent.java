@@ -4,11 +4,32 @@ import org.springframework.data.annotation.Id;
 
 public class QuizStudent {
 	
+	private int quizId;
+	
+	public int getQuizId() {
+		return quizId;
+	}
+	public void setQuizId(int quizId) {
+		this.quizId = quizId;
+	}
+	
+	
 	private String name;
+	
 	@Id
 	private String rollnumber;	
+	
 	private String response;
 	
+	private String email;
+	
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public String getName() {
 		return name;
 	}

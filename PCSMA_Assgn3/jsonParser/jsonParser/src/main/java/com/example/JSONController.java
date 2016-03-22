@@ -5,6 +5,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+
+
+import com.mongodb.util.JSON;
 
 
 
@@ -21,11 +27,15 @@ public class JSONController {
 	private int flag2;
 	private int flag3;
 	private int flag4;
-	
-	
+	private int a,b,c,d;
+	QuizDetails val;
+	private int id;
 	
 	@Autowired QuizStudentRepository quizStu;
 	@Autowired TeacherDetailsRepository teach;
+	@Autowired QuizDetailsRepository qdetails;
+	@Autowired QuizResponseRepository quizRes;
+	
 	
 	/*@RequestMapping(value="/jsonPath", method=RequestMethod.POST)
     
@@ -40,35 +50,80 @@ public class JSONController {
     //mongo.save(res);
         return name;
     }*/
+	@RequestMapping(value = "/quizdetails", method = RequestMethod.GET)
+	public @ResponseBody QuizDetails getAllDetails(
+			
+			) {
+		
+				return val;
+		//return qdetails.findAll();
+		
+	}
 	
-	
-@RequestMapping(value="/jsonPath", method=RequestMethod.POST)
+	@RequestMapping(value = "/addquizdetails", method = RequestMethod.GET)
+	public String addAllDetails(
+			@RequestParam("qid")int qid,
+			@RequestParam("ques")String ques,
+			@RequestParam("timer")int timer,
+			@RequestParam("answer")String answer,
+			Model model
+			) {
+		id=0;
+		id=(int) qdetails.count();
+		
+		if(id>0)
+		id=qdetails.findAll().get(id-1).getQid();
+				
+		val=new QuizDetails();
+		System.out.println("id earliar----->"+id);
+		QuizDetails qd=new QuizDetails();
+		qd.setQid(id+1);
+		qd.setQues(ques);
+		qd.setTimer(timer);
+		qd.setAnswer(answer);
+		val=qd;
+		qdetails.save(qd);
+		
+		System.out.println("id----->"+qdetails.count());
+		
+		return "redirect:/afterwelcome?timer="+timer+"&ques="+ques;
+		
+		
+	}
+@RequestMapping(value="/quizpath", method=RequestMethod.POST)
     
-    public @ResponseBody List<QuizStudent> savePerson(@RequestBody QuizStudent qs){
+    public @ResponseBody  List<QuizStudent> savePerson(@RequestBody QuizStudent qs){
 	
-	//  a=0;b=0;c=0;d=0;
+	 a=0;b=0;c=0;d=0;
        List<QuizStudent> res = new ArrayList<QuizStudent>();
-       System.out.println(qs.getName());
+       System.out.println(qs.getName()+" "+qs.getResponse()+" "+qs.getEmail());
        res.add(qs);
-       quizStu.save(res);
+       QuizStudent qs1=new QuizStudent();
+       qs1.setQuizId(id+1);
+       qs1.setName(qs.getName());
+       qs1.setRollnumber(qs.getRollnumber()+"_"+(id+1));
+       qs1.setResponse(qs.getResponse());
+       qs1.setEmail(qs.getEmail());
+       quizStu.save(qs1);
        
-       /*List<Character> ch=new ArrayList<Character>();
        
-       char chr;
-       for(int j=0;j<quizStu.count();j++){
-    	   for(int i=0;i<qs.getResponse().length();i++)
-           {
-        	   ch.add(qs.getResponse().charAt(i));
-        	   chr=qs.getResponse().charAt(i);
+       //List<Character> ch=new ArrayList<Character>();
+      /* 
+       String chr;
+       //for(int j=0;j<quizStu.count();j++){
+    	//   for(int i=0;i<qs.getResponse().length();i++)
+        //   {
+        	   //ch.add(qs.getResponse());
+        	   chr=qs.getResponse();
         	  // System.out.println(chr+" "+qs.getResponse());
-        	   if(chr=='a') a++;
-        	   if(chr=='b') b++;
-        	   if(chr=='c') c++;
-        	   if(chr=='d') d++;
-           }
-       }
+        	   if(chr.equals("A")) a++;
+        	   if(chr.equals("B")) b++;
+        	   if(chr.equals("C")) c++;
+        	   if(chr.equals("D")) d++;
+         //  }
+      // }
        
-       
+      
        QuizResponse qr=new QuizResponse();
        
        qr.setA(a);
@@ -79,7 +134,8 @@ public class JSONController {
        */
        
        //System.out.println(a);
-        return res;
+       // return res;
+       return res;
        //return quizRes.findAll();
     }
 
@@ -126,6 +182,8 @@ public String error(
 		else
 			str="error";
 		flag1=0;
+		
+		model.addAttribute("count",qdetails.count());
 		return str;
 	}
 	
@@ -191,12 +249,96 @@ public String error(
 		
 		@RequestMapping(value = "/afterwelcome", method = RequestMethod.GET)
 		public String afterWelcome(
+				@RequestParam("timer")int timer,
+				@RequestParam("ques")String ques,
 				Model model
 					) {
-			int[] intArray = new int[] {40,60,70,90};
+		
+			model.addAttribute("timer",timer);
+			model.addAttribute("ques",ques);
 			
-			model.addAttribute("jss",intArray);
-				
 				return "afterWelcome";
 			}
+		
+		@RequestMapping(value = "/allQuiz", method = RequestMethod.GET)
+		public String allQuiz(
+				Model model
+					) {
+			
+			val=null;
+			
+			model.addAttribute("quizes",qdetails.findAll());
+				return "allQuiz";
+			}
+		
+		@RequestMapping(value = "/studentresponse", method = RequestMethod.GET)
+		public String studentResponse(
+				Model model
+					) {
+				
+			model.addAttribute("quizstudent",quizStu.findAll());
+				return "studentResponse";
+			}
+		
+		@RequestMapping(value = "/delete", method = RequestMethod.GET)
+		public String delete(
+			@RequestParam("qid")int qid,	
+			Model model,Pageable pageable
+				) {
+
+			
+			
+			System.out.println(qid);
+			qdetails.deleteEntry(qid);
+			int qsCount=(int) quizStu.count();
+			for(int i=0;i<qsCount;i++){
+			
+				quizStu.deleteEntry(qid);
+				
+			}
+			
+			
+			//model.addAttribute("fifaUpdate",mongofifa.limitEntry(6));
+			
+			return "redirect:/allQuiz";
+		}
+		
+		@RequestMapping(value = "/graphresponse", method = RequestMethod.GET)
+		public String graphResponse(
+				@RequestParam("qid")int qid,
+				Model model
+					) {
+			a=0;b=0;c=0;d=0;
+			List<Character> ch=new ArrayList<Character>();
+		    List<QuizStudent> qs=new ArrayList<QuizStudent>();   
+		    String chr;
+		    
+		    for(int j=0;j<quizStu.count();j++){
+		    	
+		    	qs.addAll(quizStu.findAll());
+		    	try{
+		    		if(qs.get(j).getQuizId()==qid){
+		    	chr=qs.get(j).getResponse();
+		    	
+		   
+		          	   //ch.add(qs.getResponse());
+		        	  // chr=qs.getResponse();
+		        	  // System.out.println(chr);
+		        	  if(chr.equals("A")) a++;
+		        	  if(chr.equals("B")) b++;
+		        	  if(chr.equals("C")) c++;
+		        	  if(chr.equals("D")) d++;
+		    		}
+		           }
+		    	catch(Exception e){
+		    		
+		    	}
+		    	
+		       }			
+			
+			int[] intArray = new int[] {a,b,c,d};
+			model.addAttribute("message",intArray);
+				return "graphResponse";
+			}
+		
 }

@@ -266,6 +266,8 @@ public String error(
 			val=null;
 			
 			model.addAttribute("quizes",qdetails.findAll());
+			
+			
 				return "allQuiz";
 			}
 		
@@ -350,8 +352,25 @@ public String error(
 		       
 		      qr.setQuizId(qid);
 		      qr.setAnswer(answer);
-		       quizRes.save(qr);	
+		       quizRes.save(qr);
+		      
+		       QuizDetails qds=new QuizDetails();
 		       
+		       List<QuizDetails> qd=new ArrayList<QuizDetails>();  
+		       qd.addAll(qdetails.findAll());
+		       //System.out.println("QID--"+qid+"ID"+qd.get(qid));
+		       int x=0;
+				
+		       for(int i=0;i<qdetails.count();i++){
+		        if(qd.get(i).getQid()==qid)
+		        	x=i;
+		       }
+		       System.out.println("x--->"+x);
+		    	qd.get(x).setAnswer(answer);  
+		      
+		    	qdetails.save(qd);
+		    	
+		      // }
 		       return "redirect:/allQuiz";
 			//return qdetails.findAll();
 			

@@ -1,36 +1,22 @@
 package com.example;
 
-
+import org.springframework.data.annotation.Id;
 
 public class QuizResponse {
-	
-	private int a;
-	private int b;
-	private int c;
-	private int d;
-	public int getA() {
-		return a;
+	@Id
+	private int quizId;
+	private String answer;
+	public int getQuizId() {
+		return quizId;
 	}
-	public void setA(int a) {
-		this.a = a;
+	public void setQuizId(int quizId) {
+		this.quizId = quizId;
 	}
-	public int getB() {
-		return b;
+	public String getAnswer() {
+		return answer;
 	}
-	public void setB(int b) {
-		this.b = b;
-	}
-	public int getC() {
-		return c;
-	}
-	public void setC(int c) {
-		this.c = c;
-	}
-	public int getD() {
-		return d;
-	}
-	public void setD(int d) {
-		this.d = d;
+	public void setAnswer(String answer) {
+		this.answer = answer;
 	}
 	
 

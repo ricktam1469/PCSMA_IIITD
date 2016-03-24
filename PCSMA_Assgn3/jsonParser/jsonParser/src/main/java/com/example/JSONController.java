@@ -62,7 +62,6 @@ public class JSONController {
 	
 	@RequestMapping(value = "/addquizdetails", method = RequestMethod.GET)
 	public String addAllDetails(
-			@RequestParam("qid")int qid,
 			@RequestParam("ques")String ques,
 			@RequestParam("timer")int timer,
 			@RequestParam("answer")String answer,
@@ -264,7 +263,6 @@ public String error(
 		public String allQuiz(
 				Model model
 					) {
-			
 			val=null;
 			
 			model.addAttribute("quizes",qdetails.findAll());
@@ -340,5 +338,25 @@ public String error(
 			model.addAttribute("message",intArray);
 				return "graphResponse";
 			}
+		
+		@RequestMapping(value = "/answerpublish", method = RequestMethod.GET)
+		public String getAnswerDetails(
+				@RequestParam("qid")int qid,
+				@RequestParam("answer")String answer,
+				Model model
+				) {
+			
+			QuizResponse qr=new QuizResponse();
+		       
+		      qr.setQuizId(qid);
+		      qr.setAnswer(answer);
+		       quizRes.save(qr);	
+		       
+		       return "redirect:/allQuiz";
+			//return qdetails.findAll();
+			
+		}
+		
+		
 		
 }

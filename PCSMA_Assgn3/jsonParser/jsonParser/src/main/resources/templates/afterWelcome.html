@@ -5,57 +5,74 @@
 <title>Insert  here</title>
 <link rel="stylesheet" type="text/css" href="Design.css"></link>
 </head>
-<script src="validation.js"></script>
-<body id="animate-area" >
+
+<body bgcolor="black" align="center" >
 
 <script  th:inline="javascript">
 /*<![CDATA[*/
+           ////////////ONLOAD FUNCTION//////////////////////////////////
 window.onload = function (){
 	
 	var time = [[${timer}]];
 	var ques=[[${ques}]];
-	alert(time);
-	alert(ques);
+	//alert(time);
+	//alert(ques);
 	
 	//var quiztime=document.getElementById('txtbox').value;
 	//quiztimeinsec= quiztime * 60;
 	quiztimeinsec= time * 60;
-	countDown(quiztimeinsec,"status","bar");
+	countDown(quiztimeinsec,time,"status","bar",ques);
 
 }
-
-function countDown(secs,elem,bar) {
+///////////////////////////////////////////////////////////////////////////////
+//////////////////////////////CountDown///////////////////////////////////////
+function countDown(secs,min,elem,bar,ques) {
 	
 	var element = document.getElementById(elem);
 	var barV = document.getElementById(bar);
 	
-	element.innerHTML = "Time left  "+secs+" seconds";
-	//barV.innerHTML=" <meter high="+(secs-10)/100+" low="+(secs-40)/100+" max="+secs/100+" optimum="+secs/100+" value="+secs/100+"></meter>"
-	barV.innerHTML=" <meter high=1 low=0.2 max=1.2 optimum=1.2 value="+secs/100+"></meter>"
+	
+	
+	barV.innerHTML=" <font face=Comic Sans MS size=5 color=cyan>Question : </font> <font face=Comic Sans MS size=11 color=white>"+ques+"</font><br></br><br></br> <meter id=meter high="+(min/2)+" low="+(min/8)+" max="+(min*60)/100+" optimum="+(min*60)/100+" value="+secs/100+"></meter>"
+	
+	element.innerHTML = "<font face=Comic Sans MS size=10 color=white>Time left  "+secs+" seconds</font>";
+	if(secs < ((min/8)*100)){
+		element.innerHTML = "<font class=blink face=Comic Sans MS size=10 color=#f81021>Time left  "+secs+" seconds</font>";
+	}
 	if(secs < 1) {
 		clearTimeout(timer);
 		element.innerHTML = '<h2><a href="/allQuiz">See Result Log</a></h2>';
 		window.location="http://localhost:8080/allQuiz";
 	}
 	secs--;
-	var timer = setTimeout('countDown('+secs+',"'+elem+'","'+bar+'")',1000);
+	var timer = setTimeout('countDown('+secs+','+min+',"'+elem+'","'+bar+'","'+ques+'")',1000);
 }
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////extend timer/////////////////////////////////////////////////
+function extendTime(){
+	//var quiztime=document.getElementById('txtbox').value;
+	//quiztimeinsec= quiztime * 60;
+	//countDown(quiztimeinsec,"status");
+	//alert(quiztimeinsec);
+	var ques=[[${ques}]];
+	var time=prompt("Please Enter New Total Time(in minute) you want to provide","1");
+	if(time!=null){
+		window.location="http://localhost:8080/afterwelcome?timer="+time+"&ques="+ques+"";
+		//quiztimeinsec= time * 60;
+		//countDown(quiztimeinsec,time,"status","bar",ques);
+	}
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /*]]>*/
 </script>
-<div id="status"></div>
+<br></br><br></br>
 <div id="bar"></div>
 
-
-<table align="center">
-<tr>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-<th>
-
-</th>
-<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-</th>
-</tr>
-</table>
+<div id="status"></div>
+<br></br>
+<font color="#2dfb4b" face="Comic Sans MS">Change Quiz Time</font><br></br>
+<button onClick="extendTime()">   <img src="images/add.png" width="25" height="25" />  </button>
 
 </body>
 </html>

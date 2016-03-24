@@ -5,7 +5,7 @@
 <title>Insert  here</title>
 <link rel="stylesheet" type="text/css" href="Design.css"></link>
 </head>
-<script src="timer.js"></script>
+
 <body id="animate-area" align="center" >
 <header id="header">
 			<div class="innertube">
@@ -16,7 +16,7 @@
 		<main>
 			<div class="innertube" >
 				
-				<h1><font color="yellow" face="Comic Sans MS">WELCOME</font></h1>
+				<h2><font color="yellow" face="Comic Sans MS">LETS START</font></h2>
 				<div class="timer_div"></div>
 <table align="center">
 <tr>
@@ -24,42 +24,28 @@
 <th>
 
 <form action="/addquizdetails" onsubmit="return function">
-
-Choose The Subject<br></br><br></br>
+<fieldset >
+    <legend>Ready for Quiz</legend>
+<font color="#400040" face="Comic Sans MS">
+Choose The Subject<br></br>
 <input type="radio" name="pcsma" />PCSMA
 <input type="radio" name="mc" />Mobile Computing
 <input type="radio" name="Networking"/>Networking<br></br><br></br>
 
 Enter the Question<br></br>
-<select name="qid">
-  <option value="1">1</option>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option>
-  <option value="11">11</option>
-  <option value="12">12</option>
-  <option value="13">13</option>
-  <option value="14">14</option>
-</select>
-
- <input type="text" name="ques" id="ques" value="Question you know" placeholder="Enter the question"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<input type="text" name="ques" id="ques" value="Question you know?" />&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
 
 Set Timer Time<br></br>
- <input type="number" name="timer" id="timer" value="1" placeholder="Timer in sec"/>&nbsp;&nbsp;&nbsp;&nbsp;
+ <input type="number" name="timer" id="timer" value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
  
  Answer<br></br>
- <input type="text" name="answer" value="NA" placeholder="Answer"/>&nbsp;&nbsp;&nbsp;&nbsp;
+ <input type="text" name="answer" value="NA" />&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
- 
+ </font>
  <input type="submit" name="Start"/><br></br>
+ </fieldset>
 </form>
 </th>
 
@@ -101,6 +87,7 @@ Set Timer Time<br></br>
 		<footer id="footer">
 			<div class="innertube">
 				<p>@Copyright of IIITD..     By Ricktam, Kajal, Neha</p>
+				<img src="images/iiitd.png" width="84" height="47"/>
 			</div>
 		</footer>	
 

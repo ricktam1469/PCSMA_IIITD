@@ -88,10 +88,23 @@ transform:rotateX(-90deg) translateZ(60px)}
 	to { background-position: 100% 0; }
 }
 
+button:hover, button:focus {
+    z-index: 200;
+      
+}
+button img {
+    border: none;
+    -webkit-transition: all .2s;
+    -webkit-transform-origin: top;
+}
+button:hover img, button:focus img {
+    -webkit-transform: scale(2);
+  }
+
 #animate-area	{ 
 	width: 500px; 
 	height: 100px; 
-	background-image: url("/images/f12.jpg");
+	background-image: url("/images/f6.jpg");
 	background-position: 0px 0px;
 	background-repeat: repeat-x;
 
@@ -103,7 +116,7 @@ transform:rotateX(-90deg) translateZ(60px)}
 #animate-area1	{ 
 	width: 500px; 
 	height: 100px; 
-	background-image: url("/images/f4.jpg");
+	background-image: url("/images/f20.png");
 	background-position: 0px 0px;
 	background-repeat: repeat-x;
 
@@ -128,6 +141,9 @@ transform:rotateX(-90deg) translateZ(60px)}
         opacity: 0;
     }
 }
+
+
+
 
 
 body {
@@ -209,7 +225,14 @@ main {
 		}
 		
 
-
+#meter {
+  
+  margin: 0 auto 4.5em;
+  width: 900px;
+  height: 300px;
+  display: block;
+  
+}
 
 
 .innertube {
@@ -240,3 +263,9 @@ nav ul a {
 			height: 100%; 
 			width: 100%; 
 		}
+		
+		
+		
+		
+		
+ 

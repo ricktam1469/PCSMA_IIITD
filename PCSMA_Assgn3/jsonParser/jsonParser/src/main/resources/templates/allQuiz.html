@@ -3,18 +3,26 @@
 <head>
 <meta charset="ISO-8859-1"/>
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="fifaDesign.css"></link>
+<link rel="stylesheet" type="text/css" href="Design.css"></link>
 </head>
-<body bgcolor="cyan" id="animate-area">
-
-<br></br>
+<body id="animate-area" align="center" >
+<header id="header">
+			<div class="innertube">
+				<p><h1><font color="white" face="Comic Sans MS">WELCOME TO SURPRISE QUESTION</font></h1></p>
+			</div>
+		</header>
+				
+		<main>
+			<div class="innertube" >
+				
+			<br></br>
 
 <table align="center" cellspacing="10" cellspadding="10">
 <tr>
 <th>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 </th>
-<th><h1><font color="#390D69" face="Comic Sans MS">WELCOME TO FIFA WORLD</font></h1></th>
+<th><h1><font color="#390D69" face="Comic Sans MS">CHECK ALL QUIZES RESULTS</font></h1></th>
 </tr>
 <tr>
 <th></th>
@@ -26,6 +34,7 @@
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Questions</font></th>
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Answer</font></th>
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Graph Response</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Student Response</font></th>
 	
 	</tr>
 	
@@ -36,6 +45,15 @@
 	<th><a th:href="|/graphresponse?qid=${q.qid}|">See Responses</a></th>
 	<th><a href="/studentresponse">All Student Response</a></th>
 	<th><a th:href="|/delete?qid=${q.qid}|"><input type="button" value="Delete" name="delete"/></a></th>
+	<th>
+	<form action="/answerpublish">
+	<input type="hidden" name="qid" th:value="${q.qid}"/>
+	Select Answer:<select name="answer" vlaue="A">
+    <option>A</option> <option>B</option><option>C</option> <option>D</option>
+    </select>
+    <input type="submit" value="submit"/>
+    </form>
+    </th>
 	</tr>
 	
 </table>
@@ -45,15 +63,53 @@
 <tr>
 <th></th>
 <th>
-<font color="#4CA3DC" face="Comic Sans MS">Want to Add more</font><br></br><a href="/insert">
-           <img src="images/add.png" width="25" height="25" /></a><br></br>
-<font color="#4CA3DC" face="Comic Sans MS">GO BACK TO HOME SPORTS PAGE</font><br></br><a href="/welcome">
+
+<font color="#4CA3DC" face="Comic Sans MS">GO BACK </font><br></br><a href="/welcome">
            <img src="images/back.bmp" width="50" height="50" /></a>
 </th>
 <th></th>
 </tr>
 </table>
-<br></br><br></br>
+
+	
+			</div>
+		</main>
+
+		<nav id="left">
+			<div class="innertube" >
+				<h2>Welcome</h2>
+				<ul>
+					<li>Mr abc</li>
+					<li>IIITDelhi</li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+					<li><a href="#">Link 5</a></li>
+				</ul>
+				<h1>Heading</h1>
+				<ul>
+					<li><a href="#">Link 1</a></li>
+					<li><a href="#">Link 2</a></li>
+					<li><a href="#">Link 3</a></li>
+					<li><a href="#">Link 4</a></li>
+					<li><a href="#">Link 5</a></li>
+				</ul>
+
+			</div>
+		</nav>	
+		<div id="right">
+			<div class="innertube" >
+				<p>Go Back</p>
+			</div>
+		</div>
+		
+		<footer id="footer">
+			<div class="innertube">
+				<p>@Copyright of IIITD..     By Ricktam, Kajal, Neha</p>
+			</div>
+		</footer>	
+
+
+
 
 </body>
 </html>

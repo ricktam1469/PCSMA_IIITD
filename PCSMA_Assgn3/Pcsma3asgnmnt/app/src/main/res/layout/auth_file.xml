@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Google-SignIn"
+        android:text="Google-SignIn for QUIZ"
         android:id="@+id/textView"
         android:textSize="25dp"
         android:textAlignment="center"

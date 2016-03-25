@@ -49,7 +49,7 @@
 
             <LinearLayout
                 android:orientation="horizontal"
-                android:layout_width="101dp"
+                android:layout_width="86dp"
                 android:layout_height="match_parent"></LinearLayout>
 
             <TextView
@@ -59,7 +59,7 @@
                 android:text="WELCOME TO QUIZ WORLD"
                 android:id="@+id/textView6"
                 android:textColor="#fbe919"
-                android:textSize="19dp"
+                android:textSize="17dp"
                 android:textStyle="bold"
                 android:textColorHighlight="#f80f0f" />
         </LinearLayout>
@@ -102,7 +102,7 @@
             android:id="@+id/etName"
             android:layout_width="227dp"
             android:layout_height="wrap_content"
-            android:textColor="#B6BAC6"
+            android:textColor="#f48b4a"
             android:layout_toRightOf="@+id/tvName"/>
 
         </LinearLayout>
@@ -148,7 +148,8 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/roll"
             android:layout_below="@+id/etName"
-                android:layout_weight="0.24" />
+                android:layout_weight="0.24"
+                android:textColor="#f48b4a" />
 
         </LinearLayout>
 
@@ -171,7 +172,7 @@
                 android:text="START QUIZ"
                 android:background="#0cf6fe"
                 android:id="@+id/nxt"
-                android:layout_weight="0.15" />
+                android:layout_weight="0.07" />
 
         </LinearLayout>
 
@@ -179,7 +180,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="0.07">
+            android:layout_weight="0.50">
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -195,13 +196,31 @@
                 android:text="CLEAR"
                 android:background="#b7c4f0"
                 android:id="@+id/clr"
-                android:layout_weight="0.06" />
+                android:layout_weight="0.03" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="39dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.01"></LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"></LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="154dp"
+                android:layout_height="match_parent"></LinearLayout>
 
         </LinearLayout>
 

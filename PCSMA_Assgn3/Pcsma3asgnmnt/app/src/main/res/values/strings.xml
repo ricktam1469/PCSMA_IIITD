@@ -11,4 +11,5 @@
     <string name="signed_out">Signed out</string>
     <string name="signed_in_err">"Error: please check logs."</string>
     <string name="error_null_person">Error</string>
+    <string name="title_activity_quiz_over">QuizOver</string>
 </resources>

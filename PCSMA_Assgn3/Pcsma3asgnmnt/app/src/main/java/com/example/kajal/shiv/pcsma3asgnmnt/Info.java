@@ -1,12 +1,16 @@
 package com.example.kajal.shiv.pcsma3asgnmnt;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -24,10 +28,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 public class Info extends Activity implements View.OnClickListener
  {
-    private TextView name, rollno, email;
+    private TextView name, rollno, email,qt;
     RadioGroup rgOpinion;
     Button btnSubmit;
      StuQuizDetails person;
@@ -36,20 +45,94 @@ public class Info extends Activity implements View.OnClickListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_file);
+
         name = (TextView) findViewById(R.id.name);
         rollno = (TextView) findViewById(R.id.rollno);
         email = (TextView) findViewById(R.id.email);
-        Intent data = getIntent();
-        name.setText((data.getExtras().get("name")).toString());
-        rollno.setText((data.getExtras().get("rollno")).toString());
-        email.setText((data.getExtras().get("email")).toString());
+        qt=(TextView) findViewById(R.id.question);
+        int time=0;
+
+
+        try{
+            Intent data = getIntent();
+            name.setText((data.getExtras().get("name")).toString());
+            rollno.setText((data.getExtras().get("rollno")).toString());
+            email.setText((data.getExtras().get("email")).toString());
+
+            if((data.getExtras().get("ques")).toString()!=null)
+                qt.setText((data.getExtras().get("ques")).toString());
+
+            time=(int)(data.getExtras().get("timer"));
+
+        }
+        catch (Exception e){
+
+        }
+
         /** Called when the activity is first created. */
         // Init Widget GUI
         rgOpinion = (RadioGroup) findViewById(R.id.rgOpinion);
         btnSubmit = (Button) findViewById(R.id.sbmt);
         // Attached Click listener to Button
         btnSubmit.setOnClickListener(this);
+
+
+        timer(time);
     }
+
+
+     public void timer(int minutes) {
+
+         final TextView _tv = (TextView) findViewById(R.id.main_timer_text);
+         new CountDownTimer(minutes*60*1000, 1000) {
+
+             public void onTick(long millisUntilFinished) {
+                 long millis = millisUntilFinished;
+                 String hms = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(millis),
+                         TimeUnit.MILLISECONDS.toMinutes(millis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(millis)),
+                         TimeUnit.MILLISECONDS.toSeconds(millis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millis)));
+                 System.out.println(hms);
+                 _tv.setText(hms);
+                 /////////////////////////////////////////////
+                 Animation anim = new AlphaAnimation(0.0f, 1.0f);
+                 anim.setDuration(200); //You can manage the time of the blink with this parameter
+                 anim.setStartOffset(20);
+                 anim.setRepeatMode(Animation.REVERSE);
+                 anim.setRepeatCount(Animation.INFINITE);
+                 /////////////////////////////////////////////
+                 Animation anim1 = new AlphaAnimation(0.0f, 1.0f);
+                 anim1.setDuration(75); //You can manage the time of the blink with this parameter
+                 anim1.setStartOffset(20);
+                 anim1.setRepeatMode(Animation.REVERSE);
+                 anim1.setRepeatCount(Animation.INFINITE);
+                 ////////////////////////////////////////////
+                 if((millisUntilFinished/1000) <60) {
+                     _tv.setTextColor(Color.GREEN);
+                     _tv.startAnimation(anim);
+                 }
+
+                 if( (millisUntilFinished/1000)<20) {
+                     _tv.setTextColor(Color.RED);
+                     _tv.append(" HURRY UP!!!");
+                     _tv.startAnimation(anim1);
+                 }
+             }
+
+             public void onFinish() {
+                 _tv.setText("TIME UP!");
+                 Intent Main2Activity = new Intent(Info.this, QuizOver.class);
+                 Main2Activity.putExtra("status","QUIZ IS OVER !! ");
+                 startActivity(Main2Activity);
+                 finish();
+
+             }
+         }.start();
+
+     }
+
+
+
+
      public static String POST(String url, StuQuizDetails person)
      {
          InputStream inputStream = null;

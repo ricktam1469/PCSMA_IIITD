@@ -22,9 +22,8 @@
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="2.14"
-        android:background="#bbaed6f3">
+        android:layout_height="match_parent"
+        android:background="@drawable/q13">
         <com.google.android.gms.common.SignInButton
             android:id="@+id/sign_in_button"
             android:layout_width="wrap_content"
@@ -91,5 +90,6 @@
             android:layout_marginTop="24dp" />
 
     </RelativeLayout>
+
 
 </LinearLayout>

@@ -5,85 +5,76 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.example.sethi.user_info.Main2Activity"
-    android:background="#0B1A43">
+    android:background="@drawable/q4">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:id="@+id/ll_name_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:textColor="#B6BAC6"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="Name :"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_age_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_name_detail"
-            android:orientation="horizontal"
-            android:weightSum="2" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="Roll no. :"
-                android:textColor="#B6BAC6"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/rollno"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1.5"
-                android:textSize="20sp" />
-        </LinearLayout>
+        android:layout_height="match_parent"
+        android:weightSum="1">
 
         <LinearLayout
             android:id="@+id/ll_dob_detail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="37dp"
             android:layout_below="@+id/ll_age_detail"
             android:orientation="horizontal"
             android:weightSum="2" >
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight=".5"
-                android:text="Email-Id :"
-                android:textColor="#B6BAC6"
-                android:textSize="20sp"
-                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.5"
-                android:textSize="20sp" />
+                android:textSize="20dp"
+                android:textColor="#fb0606" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_name_detail"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:layout_weight="0.02">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#000000"
+                android:layout_height="wrap_content"
+                android:text="Hello! Mr.  "
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:textColor="#1f0202" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_age_detail"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_below="@+id/ll_name_detail"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="73dp"
+                android:layout_height="match_parent"></LinearLayout>
+
+            <TextView
+                android:id="@+id/rollno"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.43"
+                android:textSize="20sp"
+                android:textColor="#FF1F0202" />
         </LinearLayout>
 
         <LinearLayout
@@ -100,9 +91,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Select Your Answer"
-                android:textColor="#B6BAC6"
-                android:textSize="20dp"
-                android:id="@+id/textView3" />
+                android:textColor="#000000"
+                android:textSize="24dp"
+                android:id="@+id/textView3"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout

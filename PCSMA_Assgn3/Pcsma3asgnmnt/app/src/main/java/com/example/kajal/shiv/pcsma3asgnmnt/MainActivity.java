@@ -3,6 +3,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener
       private int timer=0;
       private String ques=null;
       private String resultCheck=null;
-
+AsyncTask task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -46,7 +47,18 @@ public class MainActivity extends Activity implements View.OnClickListener
         email.setText((data.getExtras().get("email")).toString());
         // show response on the EditText etResponse
         // call AsynTask to perform network operation on separate thread
-        new HttpAsyncTask().execute("http://192.168.21.207:8080/quizdetails");
+        Handler handler = new Handler();
+
+       /* final Runnable r = new Runnable() {
+            public void run() {
+                new HttpAsyncTask().execute("http://192.168.21.207:8080/quizdetails");
+                //handler.postDelayed(this, 1000);
+            }
+        };
+
+        handler.postDelayed(r, 1000);*/
+        
+      task= new HttpAsyncTask().execute("http://192.168.21.207:8080/quizdetails");
     }
 
     public static String GET(String url)
@@ -93,36 +105,54 @@ public class MainActivity extends Activity implements View.OnClickListener
 
         // onPostExecute displays the results of the AsyncTask.
         @Override
-        protected void onPostExecute(String result) {
-            //timer = 2;
-            //ques = "HI??";
-
-            try {
-                ////////////////////////////String Parsing////////////////////
-
-                //String str="{\"qid\":12,\"ques\":\"Question you know?\",\"timer\":1,\"answer\":\"NA\"}";
-                String[] commaSplit = result.split(",");
-                String[] qid = commaSplit[0].split(":");
-                String[] qt = commaSplit[1].split(":");
-                String[] time = commaSplit[2].split(":");
-                ques = qt[1].substring(1, (qt[1].length() - 1));
-                timer = Integer.parseInt(time[1]);
+        protected void onPostExecute(final String result) {
 
 
-                // Toast.makeText(getBaseContext(),+"--"+timer[1], Toast.LENGTH_LONG).show();
-                ////////////////////////////////////////////////
+           Runnable r = new Runnable() {
+                @Override
+                public void run(){
+                    try {
+                        ////////////////////////////String Parsing////////////////////
 
-                Toast.makeText(getBaseContext(), "Response Received From Server!", Toast.LENGTH_SHORT).show();
-                if (result == " ") {
-                    submit_btn.setEnabled(false);
-                    Toast.makeText(getBaseContext(), "Woohoo! There is no Quiz Today!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getBaseContext(), "You Can Start Your Quiz!", Toast.LENGTH_SHORT).show();
+                        //String str="{\"qid\":12,\"ques\":\"Question you know?\",\"timer\":1,\"answer\":\"NA\"}";
+                        String[] commaSplit = result.split(",");
+                        String[] qid = commaSplit[0].split(":");
+                        String[] qt = commaSplit[1].split(":");
+                        String[] time = commaSplit[2].split(":");
+                        ques = qt[1].substring(1, (qt[1].length() - 1));
+                        timer = Integer.parseInt(time[1]);
+
+
+                        // Toast.makeText(getBaseContext(),+"--"+timer[1], Toast.LENGTH_LONG).show();
+                        ////////////////////////////////////////////////
+
+                        Toast.makeText(getBaseContext(), result, Toast.LENGTH_SHORT).show();
+                        if (result == null) {
+                            submit_btn.setEnabled(false);
+                            Toast.makeText(getBaseContext(), "Woohoo! There is no Quiz Today!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getBaseContext(), "You Can Start Your Quiz!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (Exception e) {
+
+                        timer = 0;
+                        ques = null;
+                    }
+
+                   task= new HttpAsyncTask().execute("http://192.168.21.207:8080/quizdetails");
                 }
+            };
+            Handler h = new Handler();
+            h.postDelayed(r, 3000);
+        }
 
-            } catch (Exception e) {
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
 
-            }
+            timer = 0;
+            ques = null;
 
         }
     }
@@ -135,19 +165,25 @@ public class MainActivity extends Activity implements View.OnClickListener
           {
               case R.id.nxt:
                   if(ques!=null && timer!=0){
+                      //Thread.currentThread().stop();
+                      task.cancel(true);
                       Intent Main2Activity = new Intent(this, Info.class);
                       Main2Activity.putExtra("name", name.getText().toString());
                       Main2Activity.putExtra("rollno", rollno.getText().toString());
                       Main2Activity.putExtra("email", email.getText().toString());
                       Main2Activity.putExtra("ques", ques);
                       Main2Activity.putExtra("timer", timer);
+
                       startActivity(Main2Activity);
+                      finish();
                   }
                   else
                   {
+                      task.cancel(true);
                       Intent Main2Activity = new Intent(this, QuizOver.class);
                       Main2Activity.putExtra("status","NO QUIZ IS THERE !! |(*_*)| ");
                       startActivity(Main2Activity);
+                      finish();
                   }
 
                   break;

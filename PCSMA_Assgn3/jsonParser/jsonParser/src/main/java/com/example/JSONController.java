@@ -73,14 +73,14 @@ public class JSONController {
 		if(id>0)
 		id=qdetails.findAll().get(id-1).getQid();
 				
-		val=new QuizDetails();
+		//val=new QuizDetails();
 		System.out.println("id earliar----->"+id);
 		QuizDetails qd=new QuizDetails();
 		qd.setQid(id+1);
 		qd.setQues(ques);
 		qd.setTimer(timer);
 		qd.setAnswer(answer);
-		val=qd;
+		//val=qd;
 		qdetails.save(qd);
 		
 		System.out.println("id----->"+qdetails.count());
@@ -252,6 +252,11 @@ public String error(
 				@RequestParam("ques")String ques,
 				Model model
 					) {
+			
+			val=new QuizDetails();
+			val.setQues(ques);
+			val.setTimer(timer);
+		
 		
 			model.addAttribute("timer",timer);
 			model.addAttribute("ques",ques);

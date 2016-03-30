@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+</head>
+<body bgcolor="#2EFE9A">
+<script src="http://canvasjs.com/assets/script/canvasjs.min.js"></script>
+ <script type="text/javascript" src="/assets/script/canvasjs.min.js"></script>
+
+
+<script type="text/javascript"  th:inline="javascript">
+/*<![CDATA[*/
+window.onload = function () {
+	
+	//alert('hi');
+	  var quizName = [[${quizName}]];
+	  var val1 = [[${val1}]];
+	  var val2 = [[${val2}]];
+	  //alert(quizName[0]);
+	  //alert(val2[0]);
+	  //alert(val1.length);
+
+	  var dataPoints1 = [];
+	  for (var x = 0; x < val1.length; x++) {
+	      dataPoints1.push({
+	    	  y: val1[x] , label: quizName[x]
+	      });
+	  }
+	  console.dir(dataPoints1);
+	  var dataPoints2 = [];
+	  for (var x = 0; x <val2.length; x++) {
+	      dataPoints2.push({
+	    	  y: val2[x] , label: quizName[x]
+	      });
+	  }
+	  console.dir(dataPoints2);
+	  var chart = new CanvasJS.Chart("chartContainer",
+			    {
+		          theme: "theme3",//theme1
+			      title:{
+			      text: "Overall Class Performance"   
+			      },
+			      axisY:{
+			        title:"Correct/Incorrect"   
+			      },
+			      animationEnabled: true,
+			      zoomEnabled: true,
+			      zoomType: "xy",
+			      backgroundColor: "#2EFE9A",
+			      
+			      data: [
+			      {        
+			        type: "stackedColumn",
+			        toolTipContent: "{label}<br/><span style='\"'color: {color};'\"'><strong>{name}</strong></span>: {y}Right",
+			        name: "Correct Answer",
+			        showInLegend: "true",
+			       
+			        dataPoints: dataPoints1
+			      },  {        
+			        type: "stackedColumn",
+			        toolTipContent: "{label}<br/><span style='\"'color: {color};'\"'><strong>{name}</strong></span>: {y}Wrong",
+			        name: "Wrong Answer",
+			        showInLegend: "true",
+			       
+			            dataPoints: dataPoints2
+			      }            
+			      ]
+			      ,
+			      legend:{
+			        cursor:"pointer",
+			        itemclick: function(e) {
+			          if (typeof (e.dataSeries.visible) ===  "undefined" || e.dataSeries.visible) {
+				          e.dataSeries.visible = false;
+			          }
+			          else
+			          {
+			            e.dataSeries.visible = true;
+			          }
+			          chart.render();
+			        }
+			      }
+			    });
+
+			    chart.render();
+			  }
+			  /*]]>*/
+			  </script>
+
+  <div id="chartContainer" style="height: 400px; width: 100%;">
+  </div>
+  
+ 
+</body>
+</html>

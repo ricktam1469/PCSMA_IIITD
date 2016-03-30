@@ -4,6 +4,7 @@
 <meta charset="ISO-8859-1"/>
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="Design.css"></link>
+
 </head>
 <body id="animate-area" align="center" >
 <header id="header">
@@ -33,10 +34,11 @@
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Quiz No.</font></th>
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Questions</font></th>
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Correct Answer</font></th>
-	<th><font color="#390D69" face="Comic Sans MS" size="4">Graph Response</font></th>
-	<th><font color="#390D69" face="Comic Sans MS" size="4">Student Response</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Graph_Response</font></th>
+	
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Delete Key</font></th>
 	<th><font color="#390D69" face="Comic Sans MS" size="4">Correct Answer</font></th>
+	<th><font color="#390D69" face="Comic Sans MS" size="4">Details_of_Student</font></th>
 	
 	
 	</tr>
@@ -45,19 +47,19 @@
 	<th th:text = "${q.qid}"></th>
 	<th th:text = "${q.ques}"></th>
 	<th th:text = "${q.answer}"></th>
-	<th><a th:href="|/graphresponse?qid=${q.qid}|">See Responses</a></th>
-	<th><a href="/studentresponse">All Student Response</a></th>
-	<th><a th:href="|/delete?qid=${q.qid}|"><input type="button" value="Delete" name="delete"/></a></th>
+	<th><a th:href="|/graphresponse?qid=${q.qid}|"><button class="button3"><span>Responses</span></button></a></th>
+	
+	<th><a th:href="|/delete?qid=${q.qid}|"><button class="button4"  onclick="return confirm('Are you sure to DELETE?')">Delete</button></a></th>
 	<th>
 	<form action="/answerpublish">
 	<input type="hidden" name="qid" th:value="${q.qid}"/>
 	<select name="answer" vlaue="--">
     <option>A</option> <option>B</option><option>C</option> <option>D</option>
     </select>
-    <input type="submit" value="submit"/>
+    <button class="button5">Submit</button>
     </form>
     </th>
-   
+   <th th:text = "${q.correctStudent}"></th>
 	</tr>
 	
 </table>
@@ -85,17 +87,15 @@
 				<ul>
 					<li>Mr abc</li>
 					<li>IIITDelhi</li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
-					<li><a href="#">Link 5</a></li>
+					
+					
+					
 				</ul>
-				<h1>Heading</h1>
+				<h1>Class Details</h1>
 				<ul>
-					<li><a href="#">Link 1</a></li>
-					<li><a href="#">Link 2</a></li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
-					<li><a href="#">Link 5</a></li>
+					<li><a href="/studentresponse"><button class="button5">All Student Response</button></a></li>
+					<li><br></br></li>
+					<li><a href="/performance"><button class="button3"><span>Performance</span></button></a></li>
 				</ul>
 
 			</div>

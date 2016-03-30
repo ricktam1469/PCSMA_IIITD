@@ -30,6 +30,8 @@ public class JSONController {
 	private int a,b,c,d;
 	QuizDetails val;
 	private int id;
+	int countRt=0;
+	int Tcount=0;
 	
 	@Autowired QuizStudentRepository quizStu;
 	@Autowired TeacherDetailsRepository teach;
@@ -60,11 +62,25 @@ public class JSONController {
 		
 	}
 	
+	@RequestMapping(value = "/detailedPerformance", method = RequestMethod.GET)
+	public @ResponseBody List<QuizStudent> getStudentDetails(
+			
+			) {
+		
+				return quizStu.findAll();
+		//return qdetails.findAll();
+		
+	}
+	
 	@RequestMapping(value = "/addquizdetails", method = RequestMethod.GET)
 	public String addAllDetails(
 			@RequestParam("ques")String ques,
 			@RequestParam("timer")int timer,
 			@RequestParam("answer")String answer,
+			@RequestParam("optionA")String optionA,
+			@RequestParam("optionB")String optionB,
+			@RequestParam("optionC")String optionC,
+			@RequestParam("optionD")String optionD,
 			Model model
 			) {
 		id=0;
@@ -84,8 +100,9 @@ public class JSONController {
 		qdetails.save(qd);
 		
 		System.out.println("id----->"+qdetails.count());
+		String options="(A) "+optionA+" | "+"(B) "+optionB+" | "+"(C) "+optionC+" | "+"(D) "+optionD;
 		
-		return "redirect:/afterwelcome?timer="+timer+"&ques="+ques;
+		return "redirect:/afterwelcome?timer="+timer+"&ques="+ques+"&option="+options;
 		
 		
 	}
@@ -170,6 +187,7 @@ public String error(
 	
 	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
 	public String welcome(
+			@RequestParam("email")String email,
 		Model model
 			) {
 		String str=null;
@@ -181,8 +199,11 @@ public String error(
 		else
 			str="error";
 		flag1=0;
+	
+	System.out.println("!!!"+teach.findByemail(email).getName());
 		
 		model.addAttribute("count",qdetails.count());
+		model.addAttribute("name",teach.findByemail(email).getName());
 		return str;
 	}
 	
@@ -195,12 +216,12 @@ public String error(
 			) {
 		String string = null;
 
-		//System.out.println(teach.exists(email)+" "+teach.exists(password)+" "+password+" "+teach.findBypassword(password).getPassword().equals(password));
-		//System.out.println(teach.findOne(email).getPassword().equals(password));
+		System.out.println(email+teach.exists(email)+" "+teach.exists(password)+" "+password+" "+teach.findBypassword(password).getPassword().equals(password));
+		System.out.println(teach.findOne(email).getPassword().equals(password));
 		
 		try {
 			if(teach.exists(email) && teach.findOne(email).getPassword().equals(password)){
-				string="redirect:/welcome";
+				string="redirect:/welcome?email="+email;
 				flag1=1;
 			}
 				
@@ -250,6 +271,7 @@ public String error(
 		public String afterWelcome(
 				@RequestParam("timer")int timer,
 				@RequestParam("ques")String ques,
+				@RequestParam("option")String option,
 				Model model
 					) {
 			
@@ -257,9 +279,9 @@ public String error(
 			val.setQues(ques);
 			val.setTimer(timer);
 		
-		
 			model.addAttribute("timer",timer);
 			model.addAttribute("ques",ques);
+			model.addAttribute("option",option);
 			
 				return "afterWelcome";
 			}
@@ -346,6 +368,51 @@ public String error(
 				return "graphResponse";
 			}
 		
+		@RequestMapping(value = "/performance", method = RequestMethod.GET)
+		public String performance(
+				
+				Model model
+					) {
+			
+			List<QuizDetails> qd=new ArrayList<QuizDetails>();
+			qd.addAll(qdetails.findAll());
+			
+			List<String> qname=new ArrayList<String>();
+			List<Integer> val=new ArrayList<Integer>();
+			List<Integer> val1=new ArrayList<Integer>();
+			List<Integer> val2=new ArrayList<Integer>();
+			
+				
+			for(int i=0;i<qd.size();i++){
+				if(qd.get(i).getTotalStudent()!=0)
+				
+					qname.add("Quiz # "+qd.get(i).getQid()+"("+(double)( (qd.get(i).getCorrectAns())/(qd.get(i).getTotalStudent()) ) *100+" %)");
+				else
+					qname.add("Quiz # "+qd.get(i).getQid());
+
+			
+			}
+			
+			for(int i=0;i<qd.size();i++){
+				//val.add( ( (qd.get(i).getCorrectAns())/(qd.get(i).getTotalStudent()) ) *100);
+			}
+			
+			
+			
+			for(int i=0;i<qd.size();i++){
+				val1.add(qd.get(i).getCorrectAns());
+			}
+			for(int i=0;i<qd.size();i++){
+				val2.add(qd.get(i).getTotalStudent()-qd.get(i).getCorrectAns());
+			}
+			
+			
+			model.addAttribute("quizName",qname.toArray());
+			model.addAttribute("val1",val1);
+			model.addAttribute("val2",val2);
+				return "performance";
+			}
+		
 		@RequestMapping(value = "/answerpublish", method = RequestMethod.GET)
 		public String getAnswerDetails(
 				@RequestParam("qid")int qid,
@@ -354,8 +421,7 @@ public String error(
 				) {
 			
 			QuizResponse qr=new QuizResponse();
-		       
-		      qr.setQuizId(qid);
+	          qr.setQuizId(qid);
 		      qr.setAnswer(answer);
 		       quizRes.save(qr);
 		      
@@ -373,9 +439,42 @@ public String error(
 		       System.out.println("x--->"+x);
 		    	qd.get(x).setAnswer(answer);  
 		      
+		    	
+		    	
+		    	List<QuizStudent> qs=new ArrayList<QuizStudent>();
+		    	qs.addAll(quizStu.findAll());
+		    	
+		    	
+		    	for(int j=0;j<qs.size();j++){
+		    		
+		    		if(qs.get(j).getQuizId()==qid){
+		    			if(qs.get(j).getResponse().equals(answer)){
+		    				countRt++;
+		    				qs.get(j).setResult(true);
+		    			}
+		    			else
+		    			{
+		    				qs.get(j).setResult(false);
+		    			}
+		    			Tcount++;
+		    		}
+		    	}
+		    	String crctAnswer="Correctly Answered: "+countRt+"\n Student Appeared: "+Tcount;
+		    	qd.get(x).setCorrectStudent(crctAnswer);
+		    	
+		    	qd.get(x).setCorrectAns(countRt);
+		    	qd.get(x).setTotalStudent(Tcount);
+		    	
+		    	quizStu.save(qs);
 		    	qdetails.save(qd);
 		    	
-		      // }
+		    	countRt=0;
+		    	Tcount=0;
+		    	
+		    	
+		    	//List<QuizStudent> qs=new ArrayList<QuizStudent>();
+		    	
+		    	
 		       return "redirect:/allQuiz";
 			//return qdetails.findAll();
 			

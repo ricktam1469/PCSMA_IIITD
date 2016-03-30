@@ -15,25 +15,26 @@ window.onload = function (){
 	
 	var time = [[${timer}]];
 	var ques=[[${ques}]];
+	var option=[[${option}]];
 	//alert(time);
-	//alert(ques);
+	//alert(option);
 	
 	//var quiztime=document.getElementById('txtbox').value;
 	//quiztimeinsec= quiztime * 60;
 	quiztimeinsec= time * 60;
-	countDown(quiztimeinsec,time,"status","bar",ques);
+	countDown(quiztimeinsec,time,"status","bar",ques,option);
 
 }
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////CountDown///////////////////////////////////////
-function countDown(secs,min,elem,bar,ques) {
+function countDown(secs,min,elem,bar,ques,option) {
 	
 	var element = document.getElementById(elem);
 	var barV = document.getElementById(bar);
 	
 	
 	
-	barV.innerHTML=" <font face=Comic Sans MS size=5 color=cyan>Question : </font> <font face=Comic Sans MS size=11 color=white>"+ques+"</font><br></br><br></br> <meter id=meter high="+(min/2)+" low="+(min/8)+" max="+(min*60)/100+" optimum="+(min*60)/100+" value="+secs/100+"></meter>"
+	barV.innerHTML=" <font face=Comic Sans MS size=5 color=cyan>Question : </font> <font face=Comic Sans MS size=11 color=white>"+ques+"</font><br></br> <font face=Comic Sans MS size=6 color=white>"+option+"</font><br></br> <meter id=meter high="+(min/2)+" low="+(min/8)+" max="+(min*60)/100+" optimum="+(min*60)/100+" value="+secs/100+"></meter>"
 	
 	element.innerHTML = "<font face=Comic Sans MS size=10 color=white>Time left  "+secs+" seconds</font>";
 	if(secs < ((min/8)*100)){
@@ -45,7 +46,7 @@ function countDown(secs,min,elem,bar,ques) {
 		window.location="http://localhost:8080/allQuiz";
 	}
 	secs--;
-	var timer = setTimeout('countDown('+secs+','+min+',"'+elem+'","'+bar+'","'+ques+'")',1000);
+	var timer = setTimeout('countDown('+secs+','+min+',"'+elem+'","'+bar+'","'+ques+'","'+option+'")',1000);
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////extend timer/////////////////////////////////////////////////
@@ -55,9 +56,10 @@ function extendTime(){
 	//countDown(quiztimeinsec,"status");
 	//alert(quiztimeinsec);
 	var ques=[[${ques}]];
+	var option=[[${option}]];
 	var time=prompt("Please Enter New Total Time(in minute) you want to provide","1");
 	if(time!=null){
-		window.location="http://localhost:8080/afterwelcome?timer="+time+"&ques="+ques+"";
+		window.location="http://localhost:8080/afterwelcome?timer="+time+"&ques="+ques+"&option="+option;
 		//quiztimeinsec= time * 60;
 		//countDown(quiztimeinsec,time,"status","bar",ques);
 	}

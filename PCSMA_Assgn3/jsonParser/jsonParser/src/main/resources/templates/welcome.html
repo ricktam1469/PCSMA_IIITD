@@ -35,7 +35,11 @@ Choose The Subject<br></br>
 Enter the Question<br></br>
 <input type="text" name="ques" id="ques" value="Question you know?" />&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
-
+Enter the Choices<br></br>
+ A <input type="text" name="optionA" id="optionA" value="A" />&nbsp;&nbsp;  B <input type="text" name="optionB" id="optionB" value="B" />&nbsp;&nbsp;
+<br></br>
+ C <input type="text" name="optionC" id="optionC" value="C" />&nbsp;&nbsp;  D <input type="text" name="optionD" id="optionD" value="D" />&nbsp;&nbsp;
+<br></br><br></br>
 Set Timer Time<br></br>
  <input type="number" name="timer" id="timer" value="1"/>&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
@@ -44,7 +48,7 @@ Set Timer Time<br></br>
  <input type="text" name="answer" value="NA" />&nbsp;&nbsp;&nbsp;&nbsp;
 <br></br><br></br>
  </font>
- <input type="submit" name="Start"/><br></br>
+ <button class="button button2">Start Quiz</button><br></br>
  </fieldset>
 </form>
 </th>
@@ -61,19 +65,17 @@ Set Timer Time<br></br>
 			<div class="innertube" >
 				<h2>Welcome</h2>
 				<ul>
-					<li>Mr abc</li>
+					<li th:text="${name}"></li>
 					<li>IIITDelhi</li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
-					<li><a href="#">Link 5</a></li>
+					
+					
+					
 				</ul>
-				<h1>Heading</h1>
+				<h1>Class Details</h1>
 				<ul>
-					<li><a href="#">Link 1</a></li>
-					<li><a href="#">Link 2</a></li>
-					<li><a href="#">Link 3</a></li>
-					<li><a href="#">Link 4</a></li>
-					<li><a href="#">Link 5</a></li>
+					<li><a href="/studentresponse"><button class="button5">All Student Response</button></a></li>
+					<li><br></br></li>
+					<li><a href="/performance"><button class="button3"><span>Performance</span></button></a></li>
 				</ul>
 
 			</div>

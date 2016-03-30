@@ -6,7 +6,25 @@ public class QuizDetails {
 	
 	@Id
 	private int qid;
+	private String ques;
+	private int timer;
+	private String answer;
+	private String correctStudent;
+	private int correctAns;
+	private int totalStudent;
 
+	public int getCorrectAns() {
+		return correctAns;
+	}
+	public void setCorrectAns(int correctAns) {
+		this.correctAns = correctAns;
+	}
+	public int getTotalStudent() {
+		return totalStudent;
+	}
+	public void setTotalStudent(int totalStudent) {
+		this.totalStudent = totalStudent;
+	}
 	public int getQid() {
 		return qid;
 	}
@@ -15,6 +33,12 @@ public class QuizDetails {
 	}
 	public String getQues() {
 		return ques;
+	}
+	public String getCorrectStudent() {
+		return correctStudent;
+	}
+	public void setCorrectStudent(String correctStudent) {
+		this.correctStudent = correctStudent;
 	}
 	public void setQues(String ques) {
 		this.ques = ques;
@@ -31,7 +55,5 @@ public class QuizDetails {
 	public void setAnswer(String answer) {
 		this.answer = answer;
 	}
-	private String ques;
-	private int timer;
-	private String answer;
+	
 }

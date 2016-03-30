@@ -23,7 +23,15 @@ public class QuizStudent {
 	
 	private String email;
 	
+	private boolean result;
 	
+	
+	public boolean isResult() {
+		return result;
+	}
+	public void setResult(boolean result) {
+		this.result = result;
+	}
 	public String getEmail() {
 		return email;
 	}

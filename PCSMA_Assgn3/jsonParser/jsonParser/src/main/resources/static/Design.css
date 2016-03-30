@@ -101,6 +101,131 @@ button:hover img, button:focus img {
     -webkit-transform: scale(2);
   }
 
+.button {
+    background-color: #00ffff;
+    border: none;
+    color: white;
+    padding: 10px 18px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.button1 {
+    background-color: #00ffff; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button1:hover {
+    background-color: #00ff40;
+    color: red;
+}
+.button2 {
+	padding: 6px 14px;
+    background-color: #00ffff; 
+    color: black; 
+    border: 2px solid #4CAF50;
+}
+
+.button2:hover {
+    background-color: #00ff40;
+    color: red;
+}
+
+.button3 {
+  display: inline-block;
+  border-radius: 13px;
+  background-color: #000000;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 14px;
+   padding: 10px 18px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 4px 2px;
+  color:white;
+}
+
+.button3 span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button3 span:after {
+  content: '>>';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+  color:cyan;
+}
+
+.button3:hover span {
+  padding-right: 25px;
+}
+
+.button3:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button4 {
+  display: inline-block;
+ padding: 10px 18px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;	
+  text-decoration: none;
+  outline: none;
+  color: #000000;
+  background-color: #00ff00;
+  border: none;
+  border-radius: 13px;
+  box-shadow: 0 9px #828282;
+}
+
+.button4:hover {background-color: #ff0000}
+
+.button4:active {
+  background-color: #00ffff;
+  box-shadow: 0 5px #828282;
+  transform: translateY(4px);
+}
+
+.button5 {
+  display: inline-block;
+ padding: 8px 16px;
+  font-size: 12px;
+  cursor: pointer;
+  text-align: center;	
+  text-decoration: none;
+  outline: none;
+  color: #000000;
+  background-color: #80ffff;
+  border: none;
+  border-radius: 13px;
+  box-shadow: 0 9px #828282;
+}
+
+.button5:hover {background-color: #ffff80}
+
+.button5:active {
+  background-color: #00ffff;
+  box-shadow: 0 5px #828282;
+  transform: translateY(4px);
+}
+
 #animate-area	{ 
 	width: 500px; 
 	height: 100px; 

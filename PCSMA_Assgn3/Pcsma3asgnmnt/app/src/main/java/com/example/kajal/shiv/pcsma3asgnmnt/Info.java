@@ -7,6 +7,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -41,6 +43,7 @@ public class Info extends Activity implements View.OnClickListener
     Button btnSubmit;
      StuQuizDetails person;
      RadioButton selectRadio;
+
      protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -75,6 +78,8 @@ public class Info extends Activity implements View.OnClickListener
         btnSubmit = (Button) findViewById(R.id.sbmt);
         // Attached Click listener to Button
         btnSubmit.setOnClickListener(this);
+
+
 
 
         timer(time);
@@ -131,9 +136,7 @@ public class Info extends Activity implements View.OnClickListener
      }
 
 
-
-
-     public static String POST(String url, StuQuizDetails person)
+    public static String POST(String url, StuQuizDetails person)
      {
          InputStream inputStream = null;
          String result = "";
@@ -222,6 +225,11 @@ public class Info extends Activity implements View.OnClickListener
              Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
          }
      }
+
+
+
+
+
      private boolean validate()
      {
          if(name.getText().toString().trim().equals(""))
@@ -255,6 +263,12 @@ public class Info extends Activity implements View.OnClickListener
             // Get Selected Radio Button and display output
             selectRadio = (RadioButton) findViewById(rgOpinion.getCheckedRadioButtonId());
             String opinion = selectRadio.getText().toString();
+
+            Intent Main2Activity = new Intent(Info.this, QuizOver.class);
+            Main2Activity.putExtra("status","QUIZ IS OVER !! ");
+            startActivity(Main2Activity);
+            finish();
+
             Toast.makeText(this, "Your option is : " + opinion, Toast.LENGTH_LONG).show();
         }
     }

@@ -117,9 +117,9 @@ public class JSONController {
        QuizStudent qs1=new QuizStudent();
        qs1.setQuizId(id+1);
        qs1.setName(qs.getName());
-       qs1.setRollnumber(qs.getRollnumber()+"_"+(id+1));
+       qs1.setRollnumber(qs.getRollnumber());
        qs1.setResponse(qs.getResponse());
-       qs1.setEmail(qs.getEmail());
+       qs1.setEmail(qs.getEmail()+"_"+(id+1));
        quizStu.save(qs1);
        
        

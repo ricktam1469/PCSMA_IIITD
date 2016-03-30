@@ -16,11 +16,12 @@ public class QuizStudent {
 	
 	private String name;
 	
-	@Id
+	
 	private String rollnumber;	
 	
 	private String response;
 	
+	@Id
 	private String email;
 	
 	private boolean result;

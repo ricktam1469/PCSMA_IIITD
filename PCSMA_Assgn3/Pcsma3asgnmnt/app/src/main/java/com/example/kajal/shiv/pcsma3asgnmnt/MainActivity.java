@@ -28,7 +28,7 @@ public class MainActivity extends Activity implements View.OnClickListener
       private int timer=0;
       private String ques=null;
       private String resultCheck=null;
-AsyncTask task;
+      AsyncTask<String, Void, String> task;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -126,7 +126,7 @@ AsyncTask task;
                         // Toast.makeText(getBaseContext(),+"--"+timer[1], Toast.LENGTH_LONG).show();
                         ////////////////////////////////////////////////
 
-                        Toast.makeText(getBaseContext(), result, Toast.LENGTH_SHORT).show();
+                       // Toast.makeText(getBaseContext(), result, Toast.LENGTH_SHORT).show();
                         if (result == null) {
                             submit_btn.setEnabled(false);
                             Toast.makeText(getBaseContext(), "Woohoo! There is no Quiz Today!", Toast.LENGTH_SHORT).show();

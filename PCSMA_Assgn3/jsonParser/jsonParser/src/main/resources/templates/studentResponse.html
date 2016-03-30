@@ -66,7 +66,7 @@
 			<div class="innertube" >
 				<h2>Welcome</h2>
 				<ul>
-					<li>Mr abc</li>
+				<li class="c3" th:text="${name}"></li>
 					<li>IIITDelhi</li>
 					
 					
@@ -74,6 +74,8 @@
 				</ul>
 				<h1>Class Details</h1>
 				<ul>
+				<li class="c2" th:text="${sub}"></li>
+				<li><br></br></li>
 					<li><a href="/studentresponse"><button class="button5">All Student Response</button></a></li>
 					<li><br></br></li>
 					<li><a href="/performance"><button class="button3"><span>Performance</span></button></a></li>
@@ -84,13 +86,19 @@
 		
 		<div id="right">
 			<div class="innertube" >
-				<p>Go Back</p>
+				<font color="white" face="Comic Sans MS">ALL LINKS</font><br></br><br></br>
+				
+				<a href="/index"><button class="button5">HomePage</button></a><br></br><br></br><br></br>
+				<a href="/login"><button class="button5">Login</button></a><br></br><br></br><br></br>
+				<a th:href="|/subject?email=${email}|"><button class="button5">Choose Subjects</button></a><br></br><br></br><br></br>
+				<a th:href="|/welcome?sub=${sub}|"><button class="button5">Welcome</button></a><br></br><br></br><br></br>
+				<a href="/allQuiz"><button class="button5">Past Quizes</button></a><br></br><br></br>
 			</div>
 		</div>
 		
 		<footer id="footer">
 			<div class="innertube">
-				<p>@Copyright of IIITD..     By Ricktam, Kajal, Neha</p>
+				<p>@Copyright of IIITD..     By Ricktam, Kajal</p>
 			</div>
 		</footer>	
 

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<title>SubjectPage</title>
+<link rel="stylesheet" type="text/css" href="Design.css"></link>
+</head>
+
+<body id="animate-area" align="center" >
+<header id="header">
+			<div class="innertube">
+				<p><h1><font color="white" face="Comic Sans MS">WELCOME TO SURPRISE QUESTION</font></h1></p><br></br>
+			</div>
+		</header>
+				
+		<main>
+			<div class="innertube" >
+				
+				<h1><font color="yellow" face="Comic Sans MS">SUBJECTS</font></h1>
+				<ul>
+					<li><a href="/welcome?sub=PCSMA"><img src="images/t2.png" width="200" height="80" /></a><br></br><br></br><br></br><br></br></li>
+					<li><a href="/welcome?sub=MOBILE COMPUTING"><img src="images/t4.png" width="300" height="80" /></a><br></br><br></br><br></br><br></br></li>
+					<li><a href="/welcome?sub=NETWORK"><img src="images/t5.png" width="200" height="80" /></a></li>
+				</ul>
+			</div>
+		</main>
+
+		<nav id="left">
+			<div class="innertube" >
+				<h2><font color="white"><u>WELCOME</u></font></h2><br></br>
+				<ul>
+					<li class="c3" th:text="${name}"></li>
+					<li><br></br></li>
+					<li><font color="white">IIITDelhi</font></li>
+				</ul>
+				<br></br><br></br>
+				
+			</div>
+		</nav>	
+		<div id="right">
+			<div class="innertube" >
+				<font color="white" face="Comic Sans MS">ALL LINKS</font><br></br><br></br>
+				
+				<a href="/index"><button class="button5">HomePage</button></a><br></br><br></br><br></br>
+				<a href="/login"><button class="button5">Login</button></a><br></br><br></br><br></br>
+				
+				
+			</div>
+		</div>
+		
+		<footer id="footer">
+			<div class="innertube">
+				<p>@Copyright of IIITD..     By Ricktam, Kajal,Neha
+				<img src="images/iiitd.png" width="64" height="25"/></p>
+			</div>
+		</footer>	
+
+</body>
+</html>

@@ -32,6 +32,9 @@ public class JSONController {
 	private int id;
 	int countRt=0;
 	int Tcount=0;
+	private String anyms;
+	private String subject;
+	private String Email;
 	
 	@Autowired QuizStudentRepository quizStu;
 	@Autowired TeacherDetailsRepository teach;
@@ -81,6 +84,7 @@ public class JSONController {
 			@RequestParam("optionB")String optionB,
 			@RequestParam("optionC")String optionC,
 			@RequestParam("optionD")String optionD,
+			@RequestParam(defaultValue="annym")String annym,
 			Model model
 			) {
 		id=0;
@@ -90,7 +94,7 @@ public class JSONController {
 		id=qdetails.findAll().get(id-1).getQid();
 				
 		//val=new QuizDetails();
-		System.out.println("id earliar----->"+id);
+		//System.out.println("id earliar----->"+id);
 		QuizDetails qd=new QuizDetails();
 		qd.setQid(id+1);
 		qd.setQues(ques);
@@ -99,8 +103,11 @@ public class JSONController {
 		//val=qd;
 		qdetails.save(qd);
 		
-		System.out.println("id----->"+qdetails.count());
+		//System.out.println("id----->"+qdetails.count());
 		String options="(A) "+optionA+" | "+"(B) "+optionB+" | "+"(C) "+optionC+" | "+"(D) "+optionD;
+		
+		
+		anyms=annym;
 		
 		return "redirect:/afterwelcome?timer="+timer+"&ques="+ques+"&option="+options;
 		
@@ -110,18 +117,32 @@ public class JSONController {
     
     public @ResponseBody  List<QuizStudent> savePerson(@RequestBody QuizStudent qs){
 	
+	
 	 a=0;b=0;c=0;d=0;
        List<QuizStudent> res = new ArrayList<QuizStudent>();
        System.out.println(qs.getName()+" "+qs.getResponse()+" "+qs.getEmail());
        res.add(qs);
+       try{
        QuizStudent qs1=new QuizStudent();
        qs1.setQuizId(id+1);
-       qs1.setName(qs.getName());
-       qs1.setRollnumber(qs.getRollnumber());
        qs1.setResponse(qs.getResponse());
-       qs1.setEmail(qs.getEmail()+"_"+(id+1));
-       quizStu.save(qs1);
+       if(anyms.equals("on")){
+    	   qs1.setName("Anonymous");
+           qs1.setRollnumber("---");
+           qs1.setEmail("anonymous@annym.com"+"_"+(id+1));
        
+       }
+       else {
+    	   qs1.setName(qs.getName());
+           qs1.setRollnumber(qs.getRollnumber());
+           qs1.setEmail(qs.getEmail()+"_"+(id+1));  
+       }
+       quizStu.save(qs1);
+	}
+	catch(Exception e)
+	{
+		
+	}
        
        //List<Character> ch=new ArrayList<Character>();
       /* 
@@ -160,7 +181,8 @@ public String error(
 	Model model
 		) {
 	
-			
+	subject=" ";
+	Email=" ";
 	return "error";
 }
 
@@ -178,33 +200,55 @@ public String error(
 	}
 	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login(
+			
 		Model model
 			) {
 		
-	
+	//subject=sub;
 		return "login";
 	}
 	
-	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
-	public String welcome(
+	@RequestMapping(value = "/subject", method = RequestMethod.GET)
+	public String subject(
 			@RequestParam("email")String email,
+			
 		Model model
 			) {
 		String str=null;
 		if(flag1==1)
 		{
-			str="welcome";
-			flag1=0;
+			str="subject";
+			//flag1=0;
 		}
 		else
+		{
 			str="error";
 		flag1=0;
-	
-	System.out.println("!!!"+teach.findByemail(email).getName());
-		
-		model.addAttribute("count",qdetails.count());
-		model.addAttribute("name",teach.findByemail(email).getName());
+		}
+		Email=email;	
+		try{model.addAttribute("name",teach.findByemail(email).getName());}catch(Exception e){}
 		return str;
+	}
+	
+	@RequestMapping(value = "/welcome", method = RequestMethod.GET)
+	public String welcome(
+			@RequestParam("sub")String sub,
+		Model model
+			) {
+		
+	//System.out.println("!!!"+teach.findByemail(email).getName());
+		subject=sub;
+		model.addAttribute("count",qdetails.count());
+		
+		System.out.println("CHECK PROBLEM---="+subject+Email);
+		
+		model.addAttribute("sub",sub);
+		try{
+			model.addAttribute("name",teach.findByemail(Email).getName());
+			model.addAttribute("email",Email);} catch(Exception e){
+				return "redirect:/login";
+			}
+		return "welcome";
 	}
 	
 	@RequestMapping(value = "/afterlogin", method = RequestMethod.GET)
@@ -221,7 +265,7 @@ public String error(
 		
 		try {
 			if(teach.exists(email) && teach.findOne(email).getPassword().equals(password)){
-				string="redirect:/welcome?email="+email;
+				string="redirect:/subject?email="+email;
 				flag1=1;
 			}
 				
@@ -254,7 +298,7 @@ public String error(
 		
 		teach.save(td);
 		
-		return "redirect:/login";
+		return "redirect:/index";
 	
 	}
 		
@@ -293,8 +337,10 @@ public String error(
 			val=null;
 			
 			model.addAttribute("quizes",qdetails.findAll());
-			
-			
+			model.addAttribute("sub",subject);
+			try{
+			model.addAttribute("name",teach.findByemail(Email).getName());
+			model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
 				return "allQuiz";
 			}
 		
@@ -304,6 +350,11 @@ public String error(
 					) {
 				
 			model.addAttribute("quizstudent",quizStu.findAll());
+			model.addAttribute("sub",subject);
+			
+			try{
+				model.addAttribute("name",teach.findByemail(Email).getName());
+				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
 				return "studentResponse";
 			}
 		
@@ -365,6 +416,13 @@ public String error(
 			
 			int[] intArray = new int[] {a,b,c,d};
 			model.addAttribute("message",intArray);
+            
+			model.addAttribute("sub",subject);
+			
+			try{
+				model.addAttribute("name",teach.findByemail(Email).getName());
+				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+			
 				return "graphResponse";
 			}
 		
@@ -410,6 +468,15 @@ public String error(
 			model.addAttribute("quizName",qname.toArray());
 			model.addAttribute("val1",val1);
 			model.addAttribute("val2",val2);
+			
+		
+			
+            model.addAttribute("sub",subject);
+			
+			try{
+				model.addAttribute("name",teach.findByemail(Email).getName());
+				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+			
 				return "performance";
 			}
 		

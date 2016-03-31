@@ -64,22 +64,24 @@
 
 		<nav id="left">
 			<div class="innertube" >
-				<h2>Welcome</h2>
+				<h2><font color="white"><u>WELCOME</u></font></h2><br></br>
 				<ul>
-				<li class="c3" th:text="${name}"></li>
-					<li>IIITDelhi</li>
-					
-					
-					
+					<li class="c3" th:text="${name}"></li>
+					<li><br></br></li>
+					<li><font color="white">IIITDelhi</font></li>
+					<li><br></br></li>
+					<li><a href="/index"><button class="button3"><span>signOut</span></button></a></li>
 				</ul>
-				<h1>Class Details</h1>
+				
+				<h1><font color="white"><u>Class Details</u></font></h1><br></br>
 				<ul>
 				<li class="c2" th:text="${sub}"></li>
-				<li><br></br></li>
+				<li><br></br><br></br></li>
 					<li><a href="/studentresponse"><button class="button5">All Student Response</button></a></li>
-					<li><br></br></li>
+					<li><br></br><br></br></li>
 					<li><a href="/performance"><button class="button3"><span>Performance</span></button></a></li>
 				</ul>
+
 
 			</div>
 		</nav>	

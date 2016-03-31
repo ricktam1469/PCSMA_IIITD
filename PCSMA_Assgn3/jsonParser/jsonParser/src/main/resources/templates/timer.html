@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1"/>
+<meta name="google-signin-client_id" content="178430002966-aoi8es60bffe9p5gf11dmrrba8ep2umf.apps.googleusercontent.com"></meta>
+<title>Insert  here</title>
+</head><body>
+<script src="https://apis.google.com/js/platform.js" async="defer"></script>
+<br></br>
+<div class="g-signin2" data-onsuccess="onSignIn"></div>
+<br></br>
+<a href="#" onclick="signOut();">Sign out</a>
+<br></br>
+<script>
+gapi.load(auth2,function()
+{
+	gapi.auth2.inti();
+	});
+
+function onSignIn(googleUser) 
+{
+	  var profile = googleUser.getBasicProfile();
+	  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+	  console.log('Name: ' + profile.getName());
+	  console.log('Image URL: ' + profile.getImageUrl());
+	  console.log('Email: ' + profile.getEmail());
+	  
+	}
+
+window.onload= function signOut() 
+  {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function ()
+    {
+      console.log('User signed out.');
+    });
+  }
+</script>
+</body>
+</html>

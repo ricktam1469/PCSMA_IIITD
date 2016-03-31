@@ -185,6 +185,14 @@ public String error(
 	Email=" ";
 	return "error";
 }
+@RequestMapping(value = "/signout", method = RequestMethod.GET)
+public String timer(
+	Model model
+		) {
+	
+	
+	return "redirect:/index";
+}
 
 
 	
@@ -193,7 +201,7 @@ public String error(
 		Model model
 			) {
 		
-				
+			flag1=1;	
 		model.addAttribute("json",teach.findAll());
 		
 		return "index";
@@ -246,7 +254,7 @@ public String error(
 		try{
 			model.addAttribute("name",teach.findByemail(Email).getName());
 			model.addAttribute("email",Email);} catch(Exception e){
-				return "redirect:/login";
+				model.addAttribute("name",Email);
 			}
 		return "welcome";
 	}
@@ -340,7 +348,7 @@ public String error(
 			model.addAttribute("sub",subject);
 			try{
 			model.addAttribute("name",teach.findByemail(Email).getName());
-			model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+			model.addAttribute("email",Email);} catch(Exception e){model.addAttribute("name",Email);}
 				return "allQuiz";
 			}
 		
@@ -354,7 +362,7 @@ public String error(
 			
 			try{
 				model.addAttribute("name",teach.findByemail(Email).getName());
-				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+				model.addAttribute("email",Email);} catch(Exception e){model.addAttribute("name",Email);}
 				return "studentResponse";
 			}
 		
@@ -421,7 +429,7 @@ public String error(
 			
 			try{
 				model.addAttribute("name",teach.findByemail(Email).getName());
-				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+				model.addAttribute("email",Email);} catch(Exception e){model.addAttribute("name",Email);}
 			
 				return "graphResponse";
 			}
@@ -475,7 +483,9 @@ public String error(
 			
 			try{
 				model.addAttribute("name",teach.findByemail(Email).getName());
-				model.addAttribute("email",Email);} catch(Exception e){return "redirect:/login";}
+				model.addAttribute("email",Email);} catch(Exception e){//return "redirect:/login";
+					model.addAttribute("name",Email);}
+				
 			
 				return "performance";
 			}

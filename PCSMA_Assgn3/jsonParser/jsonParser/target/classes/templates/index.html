@@ -5,12 +5,11 @@
 <meta name="google-signin-client_id" content="178430002966-aoi8es60bffe9p5gf11dmrrba8ep2umf.apps.googleusercontent.com"></meta>
 <title>HomePage</title>
 <link rel="stylesheet" type="text/css" href="Design.css"></link>
-
 <script>
 var flag=0;
 gapi.load(auth2,function()
 {
-	gapi.auth2.inti();
+	gapi.auth2.init();
 	});
 
 function onSignIn(googleUser) 
@@ -25,10 +24,9 @@ function onSignIn(googleUser)
 	  
 	  //document.getElementById("demo").innerHTML = "<a href='/login'>loginh</a>";
 	}
-
 window.onload=function signOut() 
   {
-	
+	alert('hi');
     var auth2 = gapi.auth2.getAuthInstance();
     auth2.signOut().then(function ()
     {
@@ -38,25 +36,18 @@ window.onload=function signOut()
 </script>
 <script src="https://apis.google.com/js/platform.js" async="defer"></script>
 </head>
-
 <body id="animate-area" align="center" >
 <header id="header">
 			<div class="innertube">
 				<p><h1><font color="white" face="Comic Sans MS">WELCOME TO SURPRISE QUESTION</font></h1></p><br></br>
 			</div>
 		</header>
-				
 		<main>
 			<div class="innertube" >
-				
 				<h1><font color="yellow" face="Comic Sans MS" size="11">WELCOME TO POP UP QUIZ</font></h1>
 				<br></br><br></br><br></br>
-				
-			
-				
 			</div>
 		</main>
-
 		<nav id="left">
 			<div class="innertube" >
 				<div class="blink"><font face="Comic Sans MS" size="3" color="yellow">Sign In and Sign Up</font></div><br></br>
@@ -64,24 +55,19 @@ window.onload=function signOut()
 					<li><form action="/login">    <button class="button button1">System Login</button></form><br></br></li>
 					<li><form action="/register">    <button class="button button1">Register</button></form><br></br></li>
 					<li>   <div class="g-signin2" data-onsuccess="onSignIn"></div></li>
-					
 				</ul>
-				
-
 			</div>
 		</nav>	
 		<div id="right">
 			<div class="innertube" >
 				<p></p>
 			</div>
-		</div>
-		
+		</div>		
 		<footer id="footer">
 			<div class="innertube">
-				<p>@Copyright of IIITD..     By Ricktam, Kajal,Neha
+				<p>@Copyright of IIITD..     By Ricktam,Kajal,Neha
 				<img src="images/iiitd.png" width="64" height="25"/></p>
 			</div>
-		</footer>	
-
+		</footer>
 </body>
 </html>
